@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@1.0.0
+
+jobs:
+  build:
+    executor: docker/docker
+    environment:
+      - DOCKER_IMAGE: elmu/elmu-deploy
+    steps:
+      - setup_remote_docker
+      - attach_workspace:
+          at: "."
+      - docker/check
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: "0.0.$CIRCLE_BUILD_NUM"
+      - docker/push:
+          image: $DOCKER_IMAGE
+          tag: "0.0.$CIRCLE_BUILD_NUM"
+
+workflows:
+  build_and_push:
+    jobs:
+      - build
+          filters:
+            branches:
+              only: master
