@@ -9,9 +9,8 @@ jobs:
     environment:
       - DOCKER_IMAGE: elmu/elmu-deploy
     steps:
+      - checkout
       - setup_remote_docker
-      - attach_workspace:
-          at: "."
       - docker/check
       - docker/build:
           image: $DOCKER_IMAGE
