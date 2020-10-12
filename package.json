@@ -1,0 +1,14 @@
+{
+  "name": "elmu-deploy",
+  "version": "1.0.0",
+  "description": "Deployment utility for ELMU",
+  "main": "elmu-deploy",
+  "repository": "https://github.com/elmu/elmu-deploy",
+  "author": "ELMU Team",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "~2.771.0",
+    "yargs": "~16.0.3"
+  }
+}
