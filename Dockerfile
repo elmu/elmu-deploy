@@ -6,8 +6,6 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN apk --no-cache --virtual build-dependencies add git python make g++ \
-    && yarn install --non-interactive --frozen-lockfile --check-files --production=true \
-    && apk del build-dependencies
+RUN yarn
 
 ENTRYPOINT ["/app/elmu-deploy"]
