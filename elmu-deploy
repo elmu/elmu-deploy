@@ -1,24 +1,21 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs');
+const minimist = require('minimist');
 const { promisify } = require('util');
 const { ECS, Credentials } = require('aws-sdk');
+
+const requiredParams = ['access-key', 'secret-key', 'region', 'cluster', 'service', 'container', 'image', 'image-tag'];
+const optionalParams = ['wait'];
 
 (async () => {
 
   try {
 
-    const config = yargs(process.argv.slice(2))
-      .option('access-key', { demandOption: true, type: 'string' })
-      .option('secret-key', { demandOption: true, type: 'string' })
-      .option('region', { demandOption: true, type: 'string' })
-      .option('cluster', { demandOption: true, type: 'string' })
-      .option('service', { demandOption: true, type: 'string' })
-      .option('container', { demandOption: true, type: 'string' })
-      .option('image', { demandOption: true, type: 'string' })
-      .option('image-tag', { demandOption: true, type: 'string' })
-      .option('wait', { default: false, type: 'boolean' })
-      .argv;
+    const config = minimist(process.argv.slice(2));
+    const missingParams = requiredParams.filter(rp => !Object.keys(config).includes(rp));
+    if (missingParams.length) {
+      throw new Error(`Missing params: ${missingParams.join(', ')}`);
+    }
 
     const ecs = new ECS({
       region: config.region,

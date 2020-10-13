@@ -9,6 +9,6 @@
   "private": true,
   "dependencies": {
     "aws-sdk": "~2.771.0",
-    "yargs": "~16.0.3"
+    "minimist": "~1.2.5"
   }
 }
