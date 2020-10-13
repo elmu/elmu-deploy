@@ -6,6 +6,6 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN yarn install --non-interactive --frozen-lockfile --check-files --production=true
+RUN npm install
 
 ENTRYPOINT ["/app/elmu-deploy"]
