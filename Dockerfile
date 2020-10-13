@@ -1,6 +1,7 @@
 FROM node:14.13.1-alpine3.12
 
 ENV NODE_ENV "production"
+ENV YARN_CACHE_FOLDER "/app/.yarn/cache"
 
 WORKDIR /app
 
